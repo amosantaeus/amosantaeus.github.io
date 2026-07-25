@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMOS ANTAEUS — 1:1 Online Coaching</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0C1B33;        /* deep aegean navy */
+    --abyss:#07101F;       /* darker panel navy */
+    --navy-line:#1D3252;
+    --gold:#C6A34F;        /* aged bronze-gold */
+    --gold-bright:#E7CD84; /* polished highlight */
+    --marble:#F4F0E6;      /* temple marble */
+    --marble-line:#DFD7C4;
+    --ink:#101725;
+    --muted:#8FA0BC;
+    --maxw:1100px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+  }
+  body{
+    background:var(--navy);
+    color:#E9E4D6;
+    font-family:'Archivo',system-ui,sans-serif;
+    font-size:16px;line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--gold);color:var(--navy)}
+  .display{font-family:'Cinzel',serif;line-height:1.05}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
+    outline:3px solid var(--gold-bright);outline-offset:2px;
+  }
+
+  /* greek key meander divider */
+  .meander{
+    height:20px;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='20' viewBox='0 0 40 20'%3E%3Cpath d='M2 18 V2 H38 V18 H12 V8 H30 V12 H20' fill='none' stroke='%23C6A34F' stroke-width='2'/%3E%3C/svg%3E");
+    background-repeat:repeat-x;
+    background-position:center;
+    opacity:.85;
+  }
+
+  .label{
+    font-size:.72rem;font-weight:600;text-transform:uppercase;
+    letter-spacing:.22em;color:var(--gold);
+  }
+
+  /* ---------- nav ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(12,27,51,.94);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--gold);
+  }
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:62px}
+  .logo{font-family:'Cinzel';font-weight:700;font-size:1.05rem;letter-spacing:.14em;text-decoration:none;color:#F1EAD8}
+  .logo b{color:var(--gold);font-weight:700}
+  .nav-links{display:flex;gap:24px;align-items:center}
+  .nav-links a{font-size:.74rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:#D9D2BE;text-decoration:none}
+  .nav-links a:hover{color:var(--gold-bright)}
+  .nav-cta{border:1px solid var(--gold);color:var(--gold-bright)!important;padding:9px 18px}
+  .nav-cta:hover{background:var(--gold);color:var(--navy)!important}
+  @media(max-width:760px){.nav-links a:not(.nav-cta){display:none}}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    background:
+      radial-gradient(1100px 480px at 70% -10%, rgba(198,163,79,.14), transparent 60%),
+      var(--navy);
+    border-bottom:1px solid var(--gold);
+  }
+  .hero-in{max-width:var(--maxw);margin:0 auto;padding:78px 24px 0}
+  .hero-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+  .hero-eyebrow::before,.hero-eyebrow::after{content:"";height:1px;width:34px;background:var(--gold)}
+  h1.hero-h{
+    font-size:clamp(2.7rem,8.2vw,6rem);
+    font-weight:700;color:#F3EDDD;text-transform:uppercase;letter-spacing:.02em;
+  }
+  h1.hero-h .gold{color:var(--gold-bright)}
+  .hero-sub{max-width:600px;margin-top:22px;font-size:1.03rem;color:#C4CBD9}
+  .hero-sub b{color:#F1EAD8}
+  .hero-actions{display:flex;gap:14px;margin:32px 0 56px;flex-wrap:wrap}
+  .btn{
+    display:inline-block;padding:15px 30px;
+    font-weight:700;font-size:.82rem;text-transform:uppercase;letter-spacing:.12em;
+    text-decoration:none;cursor:pointer;border:1px solid var(--gold);
+    transition:background .15s,color .15s;
+  }
+  .btn-solid{background:var(--gold);color:var(--navy)}
+  .btn-solid:hover{background:var(--gold-bright);border-color:var(--gold-bright)}
+  .btn-ghost{background:transparent;color:var(--gold-bright)}
+  .btn-ghost:hover{background:rgba(198,163,79,.12)}
+
+  /* stat strip */
+  .strip{border-top:1px solid var(--navy-line);background:var(--abyss)}
+  .strip-in{max-width:var(--maxw);margin:0 auto;padding:0 24px;display:grid;grid-template-columns:repeat(4,1fr)}
+  .strip .cell{padding:22px 18px;border-left:1px solid var(--navy-line)}
+  .strip .cell:first-child{border-left:none;padding-left:0}
+  .strip .k{font-size:.66rem;text-transform:uppercase;letter-spacing:.18em;color:var(--muted)}
+  .strip .v{font-family:'Cinzel';font-weight:700;font-size:1.55rem;color:#F1EAD8;margin-top:4px}
+  .strip .v span{color:var(--gold)}
+  @media(max-width:720px){
+    .strip-in{grid-template-columns:repeat(2,1fr)}
+    .strip .cell{padding-left:0;border-left:none}
+  }
+
+  /* ---------- sections ---------- */
+  section{padding:92px 0}
+  .sec-head{margin-bottom:46px}
+  .sec-head .label{display:block;margin-bottom:12px}
+  h2.sec-title{font-size:clamp(2rem,4.6vw,3.2rem);font-weight:700;text-transform:uppercase;color:#F3EDDD}
+  .marble-sec h2.sec-title{color:var(--ink)}
+  .sec-lede{max-width:640px;color:#C4CBD9;margin-top:14px}
+  .marble-sec{background:var(--marble);color:#2A3242}
+  .marble-sec .sec-lede{color:#4A5266}
+  .marble-sec .label{color:#9A7B2E}
+
+  /* ---------- myth ---------- */
+  .myth{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .myth-tablet{
+    border:1px solid var(--gold);padding:38px 34px;position:relative;
+    background:linear-gradient(160deg, rgba(198,163,79,.08), transparent 55%);
+  }
+  .myth-tablet::before{
+    content:"ΑΝΤΑΙΟΣ";
+    position:absolute;top:-14px;left:28px;background:var(--navy);padding:0 14px;
+    font-family:'Cinzel';font-weight:700;letter-spacing:.3em;color:var(--gold);font-size:.9rem;
+  }
+  .myth-tablet p{color:#C4CBD9;font-size:.98rem}
+  .myth-tablet p + p{margin-top:14px}
+  .myth-tablet b{color:var(--gold-bright)}
+  .myth-copy h2{margin-bottom:16px}
+  .myth-copy p{color:#C4CBD9;margin-top:12px}
+  .myth-copy p b{color:#F1EAD8}
+  @media(max-width:840px){.myth{grid-template-columns:1fr;gap:36px}}
+</style>
+</head>
+<body>
+
+<!-- ================= GATE ================= -->
+<div id="gate" role="dialog" aria-modal="true" aria-label="Intake before entering">
+  <div class="gate-in">
+    <span class="label">Amos Antaeus · 1:1 Coaching</span>
+    <h2 class="display gate-h">Before you enter</h2>
+    <p class="gate-p">I coach a specific kind of athlete. Fill in the short intake first — it unlocks the site and starts your application in one step.</p>
+    <div class="f-grid">
+      <div class="f-field"><label for="gName">Name</label><input id="gName" type="text" autocomplete="name" placeholder="Your name"></div>
+      <div class="f-field"><label for="gAge">Age</label><input id="gAge" type="number" inputmode="numeric" min="16" max="70" placeholder="e.g. 23"></div>
+      <div class="f-field"><label for="gHeight">Height (cm)</label><input id="gHeight" type="number" inputmode="numeric" min="140" max="230" placeholder="e.g. 188"></div>
+      <div class="f-field"><label for="gWeight">Weight (kg)</label><input id="gWeight" type="number" inputmode="decimal" min="40" max="160" step="0.5" placeholder="e.g. 72"></div>
+      <div class="f-field"><label for="gExp">Training experience</label>
+        <select id="gExp"><option value="">Select…</option><option>Never trained with weights</option><option>&lt; 6 months</option><option>6–12 months</option><option>1–2 years</option><option>2+ years</option></select>
+      </div>
+      <div class="f-field"><label for="gGoal">Training goal</label><input id="gGoal" type="text" placeholder="e.g. gain 8 kg of muscle"></div>
+    </div>
+    <div class="f-actions"><button class="btn btn-solid" id="gEnter" type="button" style="width:100%">Enter</button></div>
+    <p class="f-hint" id="gHint" aria-live="polite"></p>
+    <div id="gateNo" hidden>
+      <p class="gate-no-p">Thanks for your honesty — right now my 1:1 coaching is built specifically for <b>tall, skinny beginners on a bulk</b>, so I can't take you on as a client yet.</p>
+      <p class="gate-no-p">Follow the journey instead — new training and nutrition content every week:</p>
+      <a class="btn btn-ghost" href="https://instagram.com/amosantaeus" target="_blank" rel="noopener">Follow @amosantaeus</a>
+    </div>
+  </div>
+</div>
+
+<nav>
+  <div class="wrap nav-in">
+    <a class="logo" href="#top">AMOS&nbsp;<b>ANTAEUS</b></a>
+    <div class="nav-links">
+      <a href="#myth">The Name</a>
+      <a href="#method">Method</a>
+      <a href="#program">Program</a>
+      <a href="#nutrition">Nutrition</a>
+      <a href="#pricing">Pricing</a>
+      <a class="nav-cta" href="#apply">Apply</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-in">
+    <div class="hero-eyebrow"><span class="label">1:1 Online Coaching · 198 cm · 🇨🇭</span></div>
+    <h1 class="hero-h display">Strength<br>from the <span class="gold">ground</span> up.</h1>
+    <p class="hero-sub">
+      Five years ago I was the tall, skinny kid in the gym. I built my physique rep by rep —
+      and documented all of it. Now I coach beginners through the same climb:
+      <b>evidence-based training, a calculated surplus, and weekly 1:1 guidance</b> until the mirror changes.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-solid" href="#pricing">See coaching options</a>
+      <a class="btn btn-ghost" href="#myth">Why “Antaeus”?</a>
+    </div>
+  </div>
+  <div class="strip">
+    <div class="strip-in">
+      <div class="cell"><div class="k">Transformation</div><div class="v">5 <span>Years</span></div></div>
+      <div class="cell"><div class="k">Height / Weight</div><div class="v">198 <span>/</span> 86</div></div>
+      <div class="cell"><div class="k">Series</div><div class="v">Amos <span>vs</span> Antaeus</div></div>
+      <div class="cell"><div class="k">Base</div><div class="v">Switzerland</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= MYTH ================= -->
+<section id="myth">
+  <div class="wrap myth">
+    <div class="myth-tablet">
+      <p>In Greek myth, <b>Antaeus</b> — son of Gaia, the Earth — was an unbeatable wrestler. His secret: every time he touched the ground, the earth itself renewed his strength.</p>
+      <p>He could not be worn down, because his power came from what he stood on — not from tricks, not from luck.</p>
+      <p><b>Amos vs Antaeus</b> is my story told the same way: the ground floor was being 198&nbsp;cm and skinny. Every session since has been drawn from it.</p>
+    </div>
+    <div class="myth-copy">
+      <span class="label">The Name</span>
+      <h2 class="sec-title display">Built like the myth: from the ground</h2>
+      <p>No noise — just <b>fundamentals executed for years</b>: progressive overload, food on the plate, sleep, and patience. That's what my coaching is built on, and it's trainable.</p>
+      <p>My coaching gives you the structure I wish I'd had on day one, so your first year builds what took me two.</p>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="disclose">
+      <span class="label">Full Transparency</span>
+      <p>During my last cutting phase I was <b>not natural</b>: I used the SARM <b>S23</b>, with <b>enclomiphene as PCT</b>. I share this openly because honesty matters more than a label — you deserve to know exactly what built the physique you see.</p>
+      <p class="disclose-sub">My coaching is and stays <b>drug-free only</b>. I don't coach, recommend, or program around PEDs — everything on this site (training, volume, nutrition targets) is built for drug-free athletes.</p>
+    </div>
+  </div>
+</section>
+
+<div class="meander"></div>
+
+<!-- ================= METHOD ================= -->
+<section id="method" class="marble-sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="label">I · The Method</span>
+      <h2 class="sec-title display">Train by evidence, not by feel</h2>
+      <p class="sec-lede">Every principle below comes from current hypertrophy research. No secret techniques — the fundamentals, executed consistently for months.</p>
+    </div>
+    <div class="method-grid">
+      <div class="m-card">
+        <h3 class="display">Progressive Overload</h3>
+        <p>The non-negotiable driver of growth: do slightly more over time — more weight, more reps, or cleaner technique at the same load. We log every session and beat the logbook, not the ego.</p>
+        <span class="ev">Foundational principle of all hypertrophy research</span>
+      </div>
+      <div class="m-card">
+        <h3 class="display">Close to Failure</h3>
+        <p>Sets end 1–3 reps before failure (RIR 1–3). Hard enough to grow, controlled enough to recover and keep technique sharp — the sweet spot for beginners.</p>
+        <span class="ev">Proximity-to-failure meta-analyses (Robinson et al., 2023)</span>
+      </div>
+      <div class="m-card">
+        <h3 class="display">The Right Volume</h3>
+        <p>Roughly 10–20 hard sets per muscle per week is where most growth happens. Beginners grow on the lower end — we start there and add sets only when progress stalls.</p>
+        <span class="ev">Dose-response volume research (Schoenfeld et al.)</span>
+      </div>
+      <div class="m-card">
+        <h3 class="display">Compounds First</h3>
+        <p>Squat, hinge, press, pull. Big lifts train the most muscle per set and build the base everything stacks on. Isolation work fills the gaps — arms, shoulders, calves.</p>
+        <span class="ev">Standard beginner programming best practice</span>
+      </div>
+      <div class="m-card">
+        <h3 class="display">5–30 Reps Build Muscle</h3>
+        <p>Growth is similar across a wide rep range when sets are close to failure. We use 5–10 for compounds (easier to load) and 8–15+ for isolation (easier on the joints).</p>
+        <span class="ev">Load & rep-range meta-analyses (Schoenfeld et al., 2017)</span>
+      </div>
+      <div class="m-card">
+        <h3 class="display">2× per Week per Muscle</h3>
+        <p>Hitting each muscle at least twice weekly distributes volume into higher-quality sets and gives you more practice on the lifts. That's why the base program is full-body, 3 days a week.</p>
+        <span class="ev">Training frequency research, volume-matched</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="meander"></div>
+
+<!-- ================= PROGRAM ================= -->
+<section id="program">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="label">II · The Program</span>
+      <h2 class="sec-title display">Foundation — 3-Day Full Body</h2>
+      <p class="sec-lede">The beginner bulking template: three full-body sessions per week, every muscle trained 2–3×, built around compound lifts. Alternate Workout A and B (A–B–A one week, B–A–B the next), with at least one rest day between sessions.</p>
+    </div>
+    <div class="prog-grid">
+      <div class="prog-card">
+        <div class="prog-head"><span class="prog-label display">Workout A</span><span class="prog-days">Mon · Fri (alt.)</span></div>
+        <table class="prog-table">
+          <thead><tr><th>Exercise</th><th>Sets × Reps</th><th>RIR</th></tr></thead>
+          <tbody>
+            <tr><td>Barbell Back Squat</td><td>3 × 5–8</td><td>2–3</td></tr>
+            <tr><td>Flat Barbell Bench Press</td><td>3 × 5–8</td><td>2–3</td></tr>
+            <tr><td>Lat Pulldown or Pull-Up</td><td>3 × 8–12</td><td>1–2</td></tr>
+            <tr><td>Romanian Deadlift</td><td>2 × 8–10</td><td>2–3</td></tr>
+            <tr><td>DB Lateral Raise</td><td>3 × 12–15</td><td>1–2</td></tr>
+            <tr><td>Cable Triceps Pushdown</td><td>2 × 10–15</td><td>1–2</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prog-card">
+        <div class="prog-head"><span class="prog-label display">Workout B</span><span class="prog-days">Wed</span></div>
+        <table class="prog-table">
+          <thead><tr><th>Exercise</th><th>Sets × Reps</th><th>RIR</th></tr></thead>
+          <tbody>
+            <tr><td>Conventional Deadlift</td><td>3 × 4–6</td><td>2–3</td></tr>
+            <tr><td>Overhead Barbell Press</td><td>3 × 6–10</td><td>2–3</td></tr>
+            <tr><td>Chest-Supported Row</td><td>3 × 8–12</td><td>1–2</td></tr>
+            <tr><td>Leg Press or Hack Squat</td><td>2 × 10–12</td><td>1–2</td></tr>
+            <tr><td>Incline DB Press</td><td>2 × 8–12</td><td>1–2</td></tr>
+            <tr><td>DB or Cable Biceps Curl</td><td>2 × 10–15</td><td>1–2</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="prog-rules">
+      <div class="rule"><span class="rule-n display">Α</span><p><b>Progress every session.</b> Top of the rep range on all sets with good form → add 2.5&nbsp;kg (upper body) or 5&nbsp;kg (lower body) next time.</p></div>
+      <div class="rule"><span class="rule-n display">Β</span><p><b>Rest 2–3 min</b> on compounds, 1–2 min on isolation. Short rest costs reps — and reps are the currency of growth.</p></div>
+      <div class="rule"><span class="rule-n display">Γ</span><p><b>Film your top sets.</b> Technique is reviewed in check-ins before load goes up. Bad reps don't count.</p></div>
+      <div class="rule"><span class="rule-n display">Δ</span><p><b>Deload every 6–8 weeks</b> or when performance drops twice in a row: half the sets, lighter loads, one week.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="meander"></div>
+
+<!-- ================= NUTRITION ================= -->
+<section id="nutrition" class="marble-sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="label">III · Nutrition</span>
+      <h2 class="sec-title display">Eat in a surplus. Track it. Repeat.</h2>
+      <p class="sec-lede">You cannot out-train an empty plate. Bulking lean means a moderate, measured surplus — enough to build muscle, not enough to build a gut. The targets I set for every beginner:</p>
+    </div>
+    <div class="nut-grid">
+      <div class="nut-facts">
+        <div class="fact">
+          <div class="fact-v display">+300–500 <span>kcal</span></div>
+          <p>Daily surplus above maintenance. Aim to gain <b>~0.25–0.5% of body weight per week</b> — fast enough to grow, slow enough to stay lean.</p>
+        </div>
+        <div class="fact">
+          <div class="fact-v display">1.6–2.2 <span>g/kg</span></div>
+          <p>Protein per kg body weight per day, spread over 3–5 meals. Beyond ~1.6&nbsp;g/kg, extra protein adds little.</p>
+          <span class="ev">Morton et al., 2018 meta-analysis</span>
+        </div>
+        <div class="fact">
+          <div class="fact-v display">3–5 <span>g</span></div>
+          <p>Creatine monohydrate daily — the best-researched supplement for strength and lean mass. Everything else is optional.</p>
+        </div>
+        <div class="fact">
+          <div class="fact-v display">7–9 <span>h</span></div>
+          <p>Sleep per night. Poor sleep blunts growth and shifts weight gain toward fat. Recovery is where the surplus becomes muscle.</p>
+        </div>
+      </div>
+
+      <div class="calc" role="group" aria-label="Bulk calculator">
+        <div class="calc-head">
+          <span class="calc-title display">Your Bulk Targets</span>
+          <span class="calc-sub">Estimate — coaching dials it in weekly</span>
+        </div>
+        <div class="calc-row">
+          <label for="bw">Body weight</label>
+          <div class="calc-input">
+            <input id="bw" type="number" inputmode="decimal" min="40" max="120" step="0.5" value="70">
+            <span class="unit">kg</span>
+          </div>
+        </div>
+        <div class="calc-row">
+          <label for="act">Activity outside the gym</label>
+          <div class="calc-input">
+            <select id="act">
+              <option value="31">Mostly sitting (student / desk)</option>
+              <option value="33" selected>On your feet part of the day</option>
+              <option value="36">Physical job / very active</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn btn-solid calc-btn" id="calcBtn" type="button">Calculate targets</button>
+        <div class="calc-out" id="calcOut" aria-live="polite">
+          <div class="out-row"><span class="k">Maintenance (est.)</span><span class="v" id="oMaint">—</span></div>
+          <div class="out-row hot"><span class="k">Bulk calories</span><span class="v" id="oBulk">—</span></div>
+          <div class="out-row"><span class="k">Protein target</span><span class="v" id="oProt">—</span></div>
+          <div class="out-row"><span class="k">Weekly gain goal</span><span class="v" id="oGain">—</span></div>
+        </div>
+        <p class="calc-note">Estimates only — real intake is adjusted from your weekly weigh-in trend, not a formula.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="meander"></div>
+
+<!-- ================= PRICING ================= -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="sec-head" style="text-align:center">
+      <span class="label">IV · Pricing</span>
+      <h2 class="sec-title display">Coaching Options</h2>
+      <p class="sec-lede" style="margin-left:auto;margin-right:auto">All sessions are live 1:1 video calls — training review, technique feedback, nutrition adjustments, and your plan for the week. In English or German.</p>
+    </div>
+    <div class="price-grid">
+      <div class="price-card">
+        <div class="p-name display">Check-In</div>
+        <div class="p-desc">30-minute online session</div>
+        <div class="p-amount display">60 <span>CHF</span></div>
+        <ul class="p-list">
+          <li>Live 1:1 video call</li>
+          <li>Training log & weight-trend review</li>
+          <li>Quick technique feedback</li>
+          <li>Plan for the next 7 days</li>
+        </ul>
+        <a class="btn btn-ghost p-btn" href="#apply">Book 30 min</a>
+      </div>
+      <div class="price-card">
+        <div class="p-name display">Full Session</div>
+        <div class="p-desc">60-minute online session</div>
+        <div class="p-amount display">100 <span>CHF</span></div>
+        <ul class="p-list">
+          <li>Live 1:1 video call</li>
+          <li>Deep dive: training, nutrition, recovery</li>
+          <li>Full form review from your lift videos</li>
+          <li>Program adjustments on the spot</li>
+        </ul>
+        <a class="btn btn-ghost p-btn" href="#apply">Book 60 min</a>
+      </div>
+      <div class="price-card featured">
+        <div class="p-flag">Best Value</div>
+        <div class="p-name display">The Climb</div>
+        <div class="p-desc">10 × 60-minute sessions</div>
+        <div class="p-amount display">899 <span>CHF</span></div>
+        <div class="p-save">Save 101 CHF vs. single sessions</div>
+        <ul class="p-list">
+          <li>10 full online coaching sessions</li>
+          <li>Structured week-by-week progression</li>
+          <li>Priority scheduling</li>
+          <li>Message support between sessions</li>
+        </ul>
+        <a class="btn btn-solid p-btn" href="#apply">Start the climb</a>
+      </div>
+      <div class="price-card">
+        <div class="p-name display">Workout Plan</div>
+        <div class="p-desc">Digital program, yours to keep</div>
+        <div class="p-amount display">20 <span>CHF</span></div>
+        <ul class="p-list">
+          <li>Complete training plan (PDF)</li>
+          <li>Sets, reps, RIR & progression rules</li>
+          <li>Built on the Foundation template</li>
+          <li>Adjusted to your training days</li>
+        </ul>
+        <a class="btn btn-ghost p-btn" href="#apply">Get the plan</a>
+      </div>
+    </div>
+    <div class="who">
+      <span class="label">Who I coach</span>
+      <p>Beginners and early intermediates, <b>ages 20–30</b>, who train drug-free and want to gain size the right way. If that's you, apply below — spots are limited so every client gets real attention.</p>
+    </div>
+  </div>
+</section>
+
+<div class="meander"></div>
+
+<!-- ================= APPLY ================= -->
+<section id="apply" class="apply-sec">
+  <div class="wrap">
+    <div class="sec-head" style="text-align:center">
+      <span class="label">V · Apply</span>
+      <h2 class="apply-h display">The ground is<br><span>waiting.</span></h2>
+      <p class="apply-p">Fill in the intake questionnaire below — it's how every 1:1 coaching starts. I'll reply within 48 hours with the option that fits where you're starting from.</p>
+    </div>
+
+    <div class="intake" role="group" aria-label="Coaching intake questionnaire">
+      <div class="intake-head">
+        <span class="intake-title display">Intake Questionnaire</span>
+        <span class="intake-sub">1:1 Coaching · takes ~3 minutes</span>
+      </div>
+
+      <div class="f-grid">
+        <div class="f-field">
+          <label for="qName">Name</label>
+          <input id="qName" type="text" autocomplete="name" placeholder="Your name">
+        </div>
+        <div class="f-field">
+          <label for="qAge">Age</label>
+          <input id="qAge" type="number" inputmode="numeric" min="18" max="60" placeholder="e.g. 23">
+        </div>
+        <div class="f-field">
+          <label for="qHeight">Height (cm)</label>
+          <input id="qHeight" type="number" inputmode="numeric" min="140" max="230" placeholder="e.g. 185">
+        </div>
+        <div class="f-field">
+          <label for="qWeight">Weight (kg)</label>
+          <input id="qWeight" type="number" inputmode="decimal" min="40" max="160" step="0.5" placeholder="e.g. 68">
+        </div>
+        <div class="f-field">
+          <label for="qExp">Training experience</label>
+          <select id="qExp">
+            <option value="">Select…</option>
+            <option>Never trained with weights</option>
+            <option>&lt; 6 months</option>
+            <option>6–12 months</option>
+            <option>1–2 years</option>
+            <option>2+ years</option>
+          </select>
+        </div>
+        <div class="f-field">
+          <label for="qDays">Training days per week</label>
+          <select id="qDays">
+            <option value="">Select…</option>
+            <option>2 days</option>
+            <option>3 days</option>
+            <option>4 days</option>
+            <option>5+ days</option>
+          </select>
+        </div>
+        <div class="f-field f-wide">
+          <label for="qGoal">Training goal</label>
+          <input id="qGoal" type="text" placeholder="e.g. gain 8 kg of muscle, build a wider back…">
+        </div>
+        <div class="f-field f-wide">
+          <label for="qInjury">Injuries or physical limitations</label>
+          <input id="qInjury" type="text" placeholder="e.g. lower back pain, shoulder impingement — or “none”">
+        </div>
+        <div class="f-field">
+          <label for="qGym">Where do you train?</label>
+          <select id="qGym">
+            <option value="">Select…</option>
+            <option>Commercial gym (full equipment)</option>
+            <option>Home gym (barbell/dumbbells)</option>
+            <option>Home, minimal equipment</option>
+          </select>
+        </div>
+        <div class="f-field">
+          <label for="qPack">Interested in</label>
+          <select id="qPack">
+            <option value="">Select…</option>
+            <option>Check-In — 30 min / 60 CHF</option>
+            <option>Full Session — 60 min / 100 CHF</option>
+            <option>The Climb — 10 sessions / 899 CHF</option>
+            <option>Workout Plan — 20 CHF</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="f-field f-wide">
+          <label for="qNotes">Anything else I should know? <span class="opt">(optional)</span></label>
+          <textarea id="qNotes" rows="3" placeholder="Nutrition habits, schedule, questions…"></textarea>
+        </div>
+      </div>
+
+      <div class="f-actions">
+        <button class="btn btn-solid" id="qMail" type="button">Send by e-mail</button>
+        <button class="btn btn-ghost" id="qCopy" type="button">Copy for Instagram DM</button>
+      </div>
+      <p class="f-hint" id="qHint" aria-live="polite">Prefer Instagram? “Copy” puts your answers on the clipboard — paste them into a DM to <a href="https://instagram.com/amosantaeus" target="_blank" rel="noopener">@amosantaeus</a>.</p>
+    </div>
+
+    <p class="apply-tag display">Your biggest supporter. 🇨🇭</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <span class="display foot-logo">AMOS <b>ANTAEUS</b></span>
+    <span class="foot-note">Amos vs Antaeus · CH — General information, not medical advice.</span>
+  </div>
+</footer>
+
+<style>
+  /* method (marble) */
+  .method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--marble-line);border:1px solid var(--marble-line)}
+  .m-card{background:var(--marble);padding:28px 26px}
+  .m-card h3{font-size:1.05rem;font-weight:700;color:var(--ink);margin-bottom:10px;letter-spacing:.02em}
+  .m-card h3::before{content:"";display:block;width:28px;height:3px;background:var(--gold);margin-bottom:12px}
+  .m-card p{font-size:.92rem;color:#4A5266}
+  .m-card .ev, .fact .ev{
+    display:block;margin-top:12px;font-size:.68rem;font-weight:600;
+    color:#9A7B2E;text-transform:uppercase;letter-spacing:.1em;
+  }
+  @media(max-width:840px){.method-grid{grid-template-columns:1fr}}
+
+  /* program (navy) */
+  .prog-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  .prog-card{border:1px solid var(--navy-line);background:var(--abyss)}
+  .prog-head{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:2px solid var(--gold)}
+  .prog-label{font-size:1.2rem;font-weight:700;color:#F1EAD8}
+  .prog-days{font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:.16em}
+  .prog-table{width:100%;border-collapse:collapse;font-size:.9rem}
+  .prog-table th{
+    text-align:left;padding:10px 20px;font-size:.62rem;font-weight:600;
+    text-transform:uppercase;letter-spacing:.16em;color:var(--muted);border-bottom:1px solid var(--navy-line);
+  }
+  .prog-table td{padding:11px 20px;border-bottom:1px solid #14243F;color:#D7DCE6}
+  .prog-table td:nth-child(2),.prog-table td:nth-child(3){white-space:nowrap;color:var(--gold-bright);font-size:.85rem}
+  .prog-table tr:last-child td{border-bottom:none}
+  .prog-rules{margin-top:34px;display:grid;grid-template-columns:1fr 1fr;gap:16px 34px}
+  .rule{display:flex;gap:16px;align-items:flex-start}
+  .rule-n{color:var(--gold);font-weight:700;font-size:1.1rem;line-height:1.4}
+  .rule p{font-size:.9rem;color:#B7C0D1}
+  .rule b{color:#F1EAD8}
+  @media(max-width:820px){.prog-grid,.prog-rules{grid-template-columns:1fr}}
+
+  /* nutrition (marble) */
+  .nut-grid{display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:start}
+  .nut-facts{border-top:2px solid var(--gold)}
+  .fact{padding:24px 0;border-bottom:1px solid var(--marble-line)}
+  .fact-v{font-size:2rem;font-weight:700;color:var(--ink)}
+  .fact-v span{font-size:1.1rem;color:#9A7B2E}
+  .fact p{font-size:.92rem;color:#4A5266;margin-top:6px;max-width:440px}
+  .fact b{color:var(--ink)}
+  @media(max-width:840px){.nut-grid{grid-template-columns:1fr}}
+
+  /* calculator */
+  .calc{
+    border:1px solid var(--gold);background:var(--navy);color:#E9E4D6;
+    box-shadow:10px 10px 0 rgba(198,163,79,.35);
+    padding:28px 26px 22px;position:sticky;top:86px;
+  }
+  .calc-head{margin-bottom:20px;border-bottom:1px solid var(--gold);padding-bottom:14px}
+  .calc-title{font-size:1.35rem;font-weight:700;color:var(--gold-bright);display:block}
+  .calc-sub{font-size:.64rem;color:var(--muted);text-transform:uppercase;letter-spacing:.16em}
+  .calc-row{margin-bottom:16px}
+  .calc-row label{display:block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;margin-bottom:6px;color:#D9D2BE}
+  .calc-input{display:flex;align-items:stretch;border:1px solid var(--navy-line);background:var(--abyss)}
+  .calc-input input,.calc-input select{
+    flex:1;border:none;padding:12px;font-family:'Archivo';font-size:1rem;background:transparent;color:#F1EAD8;min-width:0;
+  }
+  .calc-input select option{color:var(--ink);background:#fff}
+  .calc-input .unit{display:flex;align-items:center;padding:0 14px;background:var(--gold);color:var(--navy);font-weight:700;font-size:.8rem}
+  .calc-btn{width:100%;margin-top:4px}
+  .calc-out{margin-top:20px;border-top:1px dashed var(--navy-line)}
+  .out-row{display:flex;justify-content:space-between;align-items:baseline;padding:11px 0;border-bottom:1px dashed var(--navy-line)}
+  .out-row .k{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+  .out-row .v{font-size:1rem;font-weight:700;color:#F1EAD8}
+  .out-row.hot .k,.out-row.hot .v{color:var(--gold-bright)}
+  .calc-note{margin-top:14px;font-size:.74rem;color:var(--muted)}
+
+  /* pricing */
+  .price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;align-items:stretch}
+  .price-card{
+    border:1px solid var(--navy-line);background:var(--abyss);
+    padding:28px 24px;display:flex;flex-direction:column;position:relative;
+  }
+  .price-card.featured{border:1px solid var(--gold);background:linear-gradient(170deg, rgba(198,163,79,.12), var(--abyss) 55%)}
+  .p-flag{
+    position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+    background:var(--gold);color:var(--navy);font-size:.62rem;font-weight:700;
+    text-transform:uppercase;letter-spacing:.18em;padding:4px 14px;white-space:nowrap;
+  }
+  .p-name{font-size:1.25rem;font-weight:700;color:#F1EAD8}
+  .p-desc{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin:4px 0 18px}
+  .p-amount{font-size:2.6rem;font-weight:700;color:var(--gold-bright);line-height:1}
+  .p-amount span{font-size:1rem;color:var(--gold)}
+  .p-save{font-size:.72rem;color:var(--gold);font-weight:600;margin-top:6px;text-transform:uppercase;letter-spacing:.08em}
+  .p-list{list-style:none;margin:20px 0 24px;flex:1}
+  .p-list li{font-size:.86rem;color:#C4CBD9;padding:7px 0 7px 20px;position:relative;border-bottom:1px solid #13223C}
+  .p-list li:last-child{border-bottom:none}
+  .p-list li::before{content:"—";position:absolute;left:0;color:var(--gold)}
+  .p-btn{text-align:center}
+  @media(max-width:1000px){.price-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:620px){.price-grid{grid-template-columns:1fr}}
+  .who{
+    margin-top:44px;border:1px solid var(--navy-line);background:var(--abyss);
+    padding:26px 28px;display:flex;gap:26px;align-items:baseline;flex-wrap:wrap;
+  }
+  .who .label{white-space:nowrap}
+  .who p{color:#C4CBD9;font-size:.95rem;max-width:720px}
+  .who b{color:var(--gold-bright)}
+
+  /* apply + footer */
+  .apply-sec{background:radial-gradient(900px 420px at 50% 110%, rgba(198,163,79,.16), transparent 60%), var(--navy)}
+  .apply-wrap{text-align:center}
+  .apply-h{font-size:clamp(2.6rem,7vw,5rem);font-weight:700;text-transform:uppercase;color:#F3EDDD;margin:16px 0 20px}
+  .apply-h span{color:var(--gold-bright)}
+  .apply-p{max-width:520px;margin:0 auto 32px;color:#C4CBD9}
+  .apply-tag{margin-top:40px;font-size:.95rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}
+  footer{border-top:1px solid var(--gold);padding:22px 0;background:var(--abyss)}
+  .foot-in{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+  .foot-logo{font-size:1rem;font-weight:700;letter-spacing:.14em;color:#F1EAD8}
+  .foot-logo b{color:var(--gold)}
+  .foot-note{font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+
+  /* intake questionnaire */
+  .intake{
+    max-width:760px;margin:0 auto;border:1px solid var(--gold);
+    background:var(--abyss);padding:34px 32px 28px;
+    box-shadow:10px 10px 0 rgba(198,163,79,.35);
+  }
+  .intake-head{border-bottom:1px solid var(--gold);padding-bottom:14px;margin-bottom:24px}
+  .intake-title{display:block;font-size:1.35rem;font-weight:700;color:var(--gold-bright)}
+  .intake-sub{font-size:.64rem;color:var(--muted);text-transform:uppercase;letter-spacing:.16em}
+  .f-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 20px}
+  .f-wide{grid-column:1 / -1}
+  .f-field label{display:block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;margin-bottom:6px;color:#D9D2BE;text-align:left}
+  .f-field .opt{color:var(--muted);font-weight:400;letter-spacing:.08em}
+  .f-field input,.f-field select,.f-field textarea{
+    width:100%;border:1px solid var(--navy-line);background:var(--navy);
+    padding:12px;font-family:'Archivo';font-size:.95rem;color:#F1EAD8;resize:vertical;
+  }
+  .f-field input::placeholder,.f-field textarea::placeholder{color:#5E7093}
+  .f-field select option{color:var(--ink);background:#fff}
+  .f-actions{display:flex;gap:14px;margin-top:26px;flex-wrap:wrap}
+  .f-actions .btn{flex:1;min-width:200px;text-align:center}
+  .f-hint{margin-top:14px;font-size:.78rem;color:var(--muted);text-align:left}
+  .f-hint a{color:var(--gold-bright)}
+  @media(max-width:620px){.f-grid{grid-template-columns:1fr}}
+
+  /* transparency disclosure */
+  .disclose{
+    margin-top:56px;border:1px solid var(--gold);background:var(--abyss);
+    padding:28px 30px;
+  }
+  .disclose .label{display:block;margin-bottom:10px}
+  .disclose p{color:#C4CBD9;font-size:.95rem;max-width:760px}
+  .disclose b{color:var(--gold-bright)}
+  .disclose-sub{margin-top:12px;padding-top:12px;border-top:1px dashed var(--navy-line)}
+
+  /* gate */
+  body.locked{overflow:hidden}
+  #gate{
+    position:fixed;inset:0;z-index:200;overflow-y:auto;
+    background:radial-gradient(1100px 480px at 70% -10%, rgba(198,163,79,.14), transparent 60%), var(--navy);
+    display:flex;align-items:flex-start;justify-content:center;padding:40px 20px;
+  }
+  #gate.hidden{display:none}
+  .gate-in{
+    width:100%;max-width:640px;border:1px solid var(--gold);background:var(--abyss);
+    padding:36px 32px;box-shadow:10px 10px 0 rgba(198,163,79,.35);margin:auto 0;
+  }
+  .gate-h{font-size:clamp(1.8rem,5vw,2.6rem);font-weight:700;text-transform:uppercase;color:#F3EDDD;margin:12px 0 10px}
+  .gate-p{color:#C4CBD9;font-size:.94rem;margin-bottom:24px}
+  .gate-no-p{color:#C4CBD9;font-size:.95rem;margin:16px 0}
+  .gate-no-p b{color:var(--gold-bright)}
+  #gateNo{border-top:1px solid var(--gold);margin-top:24px;padding-top:8px;text-align:center}
+  #gateNo .btn{display:inline-block;margin-top:8px}
+</style>
+
+<script>
+  function calc(){
+    var bw = parseFloat(document.getElementById('bw').value);
+    var act = parseFloat(document.getElementById('act').value);
+    if(!bw || bw < 40 || bw > 120){
+      document.getElementById('oMaint').textContent = 'Enter 40–120 kg';
+      return;
+    }
+    var maint = Math.round(bw * act / 10) * 10;
+    var bulkLo = maint + 300, bulkHi = maint + 500;
+    var pLo = Math.round(bw * 1.6), pHi = Math.round(bw * 2.2);
+    var gLo = (bw * 0.0025).toFixed(2), gHi = (bw * 0.005).toFixed(2);
+    document.getElementById('oMaint').textContent = '~' + maint.toLocaleString() + ' kcal';
+    document.getElementById('oBulk').textContent = bulkLo.toLocaleString() + '–' + bulkHi.toLocaleString() + ' kcal';
+    document.getElementById('oProt').textContent = pLo + '–' + pHi + ' g/day';
+    document.getElementById('oGain').textContent = '+' + gLo + '–' + gHi + ' kg/week';
+  }
+  document.getElementById('calcBtn').addEventListener('click', calc);
+  document.getElementById('bw').addEventListener('keydown', function(e){ if(e.key === 'Enter') calc(); });
+  calc();
+
+  function intakeText(){
+    function v(id){ var el = document.getElementById(id); return (el.value || '').trim(); }
+    var lines = [
+      'COACHING APPLICATION — amosantaeus.com',
+      '',
+      'Name: ' + (v('qName') || '-'),
+      'Age: ' + (v('qAge') || '-'),
+      'Height: ' + (v('qHeight') ? v('qHeight') + ' cm' : '-'),
+      'Weight: ' + (v('qWeight') ? v('qWeight') + ' kg' : '-'),
+      'Training experience: ' + (v('qExp') || '-'),
+      'Training days/week: ' + (v('qDays') || '-'),
+      'Goal: ' + (v('qGoal') || '-'),
+      'Injuries / limitations: ' + (v('qInjury') || '-'),
+      'Training location: ' + (v('qGym') || '-'),
+      'Interested in: ' + (v('qPack') || '-'),
+      'Notes: ' + (v('qNotes') || '-')
+    ];
+    return lines.join('\n');
+  }
+  function intakeValid(){
+    var need = ['qName','qAge','qHeight','qWeight','qExp','qGoal'];
+    for(var i=0;i<need.length;i++){
+      var el = document.getElementById(need[i]);
+      if(!(el.value || '').trim()){
+        el.focus();
+        document.getElementById('qHint').textContent = 'Please fill in at least name, age, height, weight, experience and goal.';
+        return false;
+      }
+    }
+    return true;
+  }
+  document.getElementById('qMail').addEventListener('click', function(){
+    if(!intakeValid()) return;
+    var subject = encodeURIComponent('Coaching Application — ' + document.getElementById('qName').value.trim());
+    var body = encodeURIComponent(intakeText());
+    window.location.href = 'mailto:coaching@amosantaeus.com?subject=' + subject + '&body=' + body;
+  });
+  document.getElementById('qCopy').addEventListener('click', function(){
+    if(!intakeValid()) return;
+    var t = intakeText();
+    function done(){ document.getElementById('qHint').textContent = 'Copied! Now paste it into a DM to @amosantaeus on Instagram.'; }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(t).then(done, function(){ fallback(); });
+    } else { fallback(); }
+    function fallback(){
+      var ta = document.createElement('textarea');
+      ta.value = t; document.body.appendChild(ta); ta.select();
+      try{ document.execCommand('copy'); done(); }catch(e){}
+      document.body.removeChild(ta);
+    }
+  });
+
+  // ---- entry gate ----
+  document.body.classList.add('locked');
+  document.getElementById('gEnter').addEventListener('click', function(){
+    function gv(id){ return (document.getElementById(id).value || '').trim(); }
+    var need = ['gName','gAge','gHeight','gWeight','gExp','gGoal'];
+    for(var i=0;i<need.length;i++){
+      var el = document.getElementById(need[i]);
+      if(!(el.value || '').trim()){
+        el.focus();
+        document.getElementById('gHint').textContent = 'Please fill in every field.';
+        return;
+      }
+    }
+    var h = parseFloat(gv('gHeight')), w = parseFloat(gv('gWeight'));
+    var bmi = w / Math.pow(h/100, 2);
+    var qualifies = (h >= 180) && (bmi <= 24);   // "tall & skinny" rule — adjust here
+    if(qualifies){
+      // prefill the application form
+      var map = {gName:'qName', gAge:'qAge', gHeight:'qHeight', gWeight:'qWeight', gGoal:'qGoal'};
+      for(var k in map){ document.getElementById(map[k]).value = gv(k); }
+      var exp = gv('gExp');
+      var sel = document.getElementById('qExp');
+      for(var j=0;j<sel.options.length;j++){ if(sel.options[j].text === exp){ sel.selectedIndex = j; break; } }
+      document.getElementById('gate').classList.add('hidden');
+      document.body.classList.remove('locked');
+      // prefill calculator too
+      if(w >= 40 && w <= 120){ document.getElementById('bw').value = w; calc(); }
+    } else {
+      document.querySelector('#gate .f-grid').style.display = 'none';
+      document.querySelector('#gate .f-actions').style.display = 'none';
+      document.getElementById('gHint').style.display = 'none';
+      document.getElementById('gateNo').hidden = false;
+    }
+  });
+</script>
+</body>
+</html>
